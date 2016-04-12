@@ -1,0 +1,11 @@
+#!/bin/zsh
+
+install_powerline() {
+DIR="$0:A:h"
+
+}
+
+echo "Installing powerline fonts"
+
+
+

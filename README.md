@@ -22,6 +22,11 @@ These dotfiles work best when dependencies are installed with brew wherever poss
 * iterm2 (via `brew cask`)
 * [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh) *
 
+*Notes on ZSH*: these dotfiles assume that your shell is ZSH. While you can install
+them on a machine for which the primary login shell is `bash` they specifically target
+oh-my-zsh and zsh by installing a `.zshrc` file and omz themes. Furthermore, the shebang
+of all scripts in this repo is `#!/bin/zsh`. Nothing will run without zsh installed.
+
 ### Installation
 
 It is best to assume that the following paths are required as is unless a specific
