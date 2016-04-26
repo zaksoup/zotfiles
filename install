@@ -1,11 +1,62 @@
 #!/bin/zsh
 
-install_powerline() {
-DIR="$0:A:h"
-
+setup() {
+  ZOTFILES="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 }
 
-echo "Installing powerline fonts"
+install_git() {
+  brew install git
+  brew link git --force
+}
+
+install_git_duet() {
+  brew install git-duet/tap/git-duet
+}
+
+install_golang() {
+  brew install golang
+}
+
+install_iterm() {
+  brew cask install iterm2
+  ln -s "$ZOTFILES/com.googlecode.iterm2.plist" "$HOME/Library/Preferences/com.googlecode.iterm2.plist"
+  defaults read -app iTerm
+}
+
+install_omz() {
+  git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+  chsh -s /bin/zsh
+}
+
+install_powerline() {
+  echo "Installing powerline fonts\n"
+  pushd "$HOME/workspace"
+    git clone https://github.com/powerline/fonts.git powerline-fonts
+    pushd powerline-fonts
+      ./install.sh
+    popd
+  popd
+}
+
+link_dotfiles() {
+  ln -s "$ZOTFILES/.zshrc" "$HOME/.zshrc"
+  ln -s "$ZOTFILES/zagnoster.zsh-theme" "$HOME/.oh-my-zsh/themes/zagnoster.zsh-theme"
+  ln -s "$ZOTFILES/.gitconfig" "$HOME/.gitconfig"
+}
+
+main() {
+  setup
+
+  install_git
+  install_git_duet
+  install_golang
+  install_iterm
+  install_powerline
+  install_omz
+  link_dotfiles
+}
+
+main $@
 
 
 

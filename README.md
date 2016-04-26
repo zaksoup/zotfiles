@@ -18,9 +18,6 @@ These dotfiles work best when dependencies are installed with brew wherever poss
 
 * xcode CLI tools (`xcode-select --install`) *
 * [homebrew](http://brew.sh)
-* golang 1.6
-* iterm2 (via `brew cask`)
-* [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh) *
 
 *Notes on ZSH*: these dotfiles assume that your shell is ZSH. While you can install
 them on a machine for which the primary login shell is `bash` they specifically target
@@ -46,8 +43,12 @@ exception is noted.
 
 The install script will:
 
-* clone and install [powerline fonts](https://github.com/powerline/fonts)
+* install git via brew
 * install the [git-duet](https://github.com/git-duet/git-duet) brew package
+* golang 1.6 via brew
+* iterm2 via `brew cask`
+* [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh) *
+* clone and install [powerline fonts](https://github.com/powerline/fonts)
 * add `git ci` as an alias for `git duet-commit`
 * overwrite the current `~/.zshrc` with one from this repo
 * install the "Zagnoster" ZSH theme (agnoster with git-duet support)
