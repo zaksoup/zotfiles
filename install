@@ -20,7 +20,7 @@ install_golang() {
 install_iterm() {
   brew cask install iterm2
   ln -s "$ZOTFILES/com.googlecode.iterm2.plist" "$HOME/Library/Preferences/com.googlecode.iterm2.plist"
-  defaults read -app iTerm
+  defaults read "$HOME/Library/Preferences/com.googlecode.iterm2.plist"
 }
 
 install_omz() {
