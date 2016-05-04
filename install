@@ -44,6 +44,14 @@ link_dotfiles() {
   ln -s "$ZOTFILES/.gitconfig" "$HOME/.gitconfig"
 }
 
+install_neovim() {
+  brew install neovim/neovim/neovim
+  ln -s /usr/local/bin/nvim /usr/local/bin/vim
+  source ~/.zshrc
+  brew install python3
+  pip3 install -y neovim
+}
+
 main() {
   setup
 
@@ -52,6 +60,7 @@ main() {
   install_golang
   install_iterm
   install_powerline
+  install_neovim
   install_omz
   link_dotfiles
 }
