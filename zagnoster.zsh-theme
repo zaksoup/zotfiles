@@ -85,12 +85,16 @@ prompt_context() {
 }
 
 prompt_git_duet() {
-  local author=$(git config duet.env.git-author-initials)
-  local committer=$(git config duet.env.git-committer-initials)
-  if [[ -z $committer ]]; then
-    echo -n "${author} "
-  else
-    echo -n "${author} ${committer} "
+  if $(git rev-parse --is-inside-work-tree >/dev/null 2>&1); then
+    prompt_segment cyan grey
+
+    local author=$(git config duet.env.git-author-initials)
+    local committer=$(git config duet.env.git-committer-initials)
+    if [[ -z $committer ]]; then
+      echo -n "${author}"
+    else
+      echo -n "${author} ${committer}"
+    fi
   fi
 }
 
@@ -133,7 +137,7 @@ prompt_git() {
     zstyle ':vcs_info:*' formats ' %u%c'
     zstyle ':vcs_info:*' actionformats ' %u%c'
     vcs_info
-    echo -n "$(prompt_git_duet)${ref/refs\/heads\//$PL_BRANCH_CHAR }${vcs_info_msg_0_%% }${mode}"
+    echo -n "${ref/refs\/heads\//$PL_BRANCH_CHAR }${vcs_info_msg_0_%% }${mode}"
   fi
 }
 
@@ -203,6 +207,7 @@ prompt_status() {
 build_prompt() {
   RETVAL=$?
   prompt_dir
+  prompt_git_duet
   prompt_git
   prompt_hg
   prompt_end
@@ -215,4 +220,4 @@ line_two() {
   prompt_end
 }
 
-PROMPT="%{%f%b%k%}$(build_prompt)$(line_two) "
+PROMPT='%{%f%b%k%}$(build_prompt)$(line_two) '
