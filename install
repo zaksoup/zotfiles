@@ -51,7 +51,7 @@ install_powerline() {
 link_dotfiles() {
   ln -s "$ZOTFILES/.zshrc" "$HOME/.zshrc"
   ln -s "$ZOTFILES/zagnoster.zsh-theme" "$HOME/.oh-my-zsh/themes/zagnoster.zsh-theme"
-  ln -s "$ZOTFILES/.gitconfig" "$HOME/.gitconfig"
+  cp "$ZOTFILES/.gitconfig" "$HOME/.gitconfig"
 
   #Link and read Spectacle prefs
   ln -s "$ZOTFILES/com.divisiblebyzero.Spectacle.plist" "$HOME/Library/Preferences/com.divisiblebyzero.Spectacle.plist"
