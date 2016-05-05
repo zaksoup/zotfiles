@@ -66,6 +66,11 @@ install_neovim() {
   pip3 install neovim
 }
 
+set_defaults() {
+  defaults write NSGlobalDomain KeyRepeat 1
+  defaults write NSGlobalDomain InitialKeyRepeat 15
+}
+
 main() {
   setup
 
@@ -83,6 +88,3 @@ main() {
 }
 
 main $@
-
-
-
