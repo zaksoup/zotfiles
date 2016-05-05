@@ -80,7 +80,17 @@ prompt_end() {
 # Context: user@hostname (who am I and where am I)
 prompt_context() {
   if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
-    prompt_segment black default "%(!.%{%F{yellow}%}.)$USER@%m"
+    prompt_segment black default "%(!.%{%F{yellow}%}.)%m"
+  fi
+}
+
+prompt_git_duet() {
+  local author=$(git config duet.env.git-author-initials)
+  local committer=$(git config duet.env.git-committer-initials)
+  if [[ -z $committer ]]; then
+    echo -n "${author} "
+  else
+    echo -n "${author} ${committer} "
   fi
 }
 
@@ -124,16 +134,6 @@ prompt_git() {
     zstyle ':vcs_info:*' actionformats ' %u%c'
     vcs_info
     echo -n "$(prompt_git_duet)${ref/refs\/heads\//$PL_BRANCH_CHAR }${vcs_info_msg_0_%% }${mode}"
-  fi
-}
-
-prompt_git_duet() {
-  local author=$(git config duet.env.git-author-initials)
-  local committer=$(git config duet.env.git-committer-initials)
-  if [[ -z $committer ]]; then
-    echo -n "${author} "
-  else
-    echo -n "${author} ${committer} "
   fi
 }
 
@@ -202,13 +202,17 @@ prompt_status() {
 ## Main prompt
 build_prompt() {
   RETVAL=$?
-  prompt_status
-  prompt_virtualenv
-  prompt_context
   prompt_dir
   prompt_git
   prompt_hg
   prompt_end
 }
+line_two() {
+  echo""
+  prompt_status
+  prompt_virtualenv
+  prompt_context
+  prompt_end
+}
 
-PROMPT='%{%f%b%k%}$(build_prompt) '
+PROMPT="%{%f%b%k%}$(build_prompt)$(line_two) "
