@@ -4,6 +4,16 @@ setup() {
   ZOTFILES="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 }
 
+install_with_brew() {
+  local to_install="${1}"
+  brew install "$to_install"
+}
+
+install_with_brew_cask() {
+  local to_install="${1}"
+  brew cask install "$to_install"
+}
+
 install_git() {
   brew install git
   brew link git --force
@@ -42,6 +52,10 @@ link_dotfiles() {
   ln -s "$ZOTFILES/.zshrc" "$HOME/.zshrc"
   ln -s "$ZOTFILES/zagnoster.zsh-theme" "$HOME/.oh-my-zsh/themes/zagnoster.zsh-theme"
   ln -s "$ZOTFILES/.gitconfig" "$HOME/.gitconfig"
+
+  #Link and read Spectacle prefs
+  ln -s "$ZOTFILES/com.divisiblebyzero.Spectacle.plist" "$HOME/Library/Preferences/com.divisiblebyzero.Spectacle.plist"
+  defaults read "$HOME/Library/Preferences/com.divisiblebyzero.Spectacle.plist"
 }
 
 install_neovim() {
@@ -58,6 +72,9 @@ main() {
   install_git
   install_git_duet
   install_golang
+  install_with_brew "fzf"
+  install_with_brew_cask "spectacle"
+  install_with_brew_cask "google-chrome"
   install_iterm
   install_powerline
   install_neovim
