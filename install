@@ -85,6 +85,7 @@ main() {
   install_neovim
   install_omz
   link_dotfiles
+  set_defaults
 }
 
 main $@
