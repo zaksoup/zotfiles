@@ -78,6 +78,7 @@ main() {
   install_git_duet
   install_golang
   install_with_brew "fzf"
+  install_with_brew "awscli"
   install_with_brew_cask "spectacle"
   install_with_brew_cask "google-chrome"
   install_with_brew_cask "flycut"
