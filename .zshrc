@@ -9,7 +9,7 @@ export GIT_DUET_ROTATE_AUTHOR=1
 export GOPATH=$HOME/go
 
 # nvim stuff
-export EDITOR=vim
+export EDITOR=nvim
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -71,8 +71,24 @@ source $ZSH/oh-my-zsh.sh
 # Stuff that bugs C.J.
 unsetopt AUTO_CD
 
+#RBENV for bosh
+#pathmunge "${HOME}/.rbenv/bin"
+
+export PATH="$PATH:${HOME}/.rbenv/bin:${HOME}/.rbenv/shims"
+
+which rbenv > /dev/null && eval "$(rbenv init -)"
+
+
+# Load the auto-completion script if rbenv was loaded.
+# [[ -e ~/.rbenv/completions/rbenv.bash ]] && source ~/.rbenv/completions/rbenv.bash
+
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
+
+#PYTHON for bosh
+export PYTHONPATH=/usr/local/lib/python3.5/site-packages
+
+alias vim=nvim
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -90,3 +106,4 @@ unsetopt AUTO_CD
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+eval "$(direnv hook zsh)"
