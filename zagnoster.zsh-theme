@@ -138,16 +138,19 @@ prompt_git() {
     zstyle ':vcs_info:*' actionformats ' %u%c'
     vcs_info
 
-    branch_name="$(git rev-parse --abbrev-ref HEAD)"
-    diff_up="$(git rev-list HEAD..origin/$branch_name --count)"
-    diff_down="$(git rev-list origin/$branch_name..HEAD --count)"
+    upstream_branch_name="$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null)"
+    if [ -n "$upstream_branch_name" ]; then
+      branch_name="$(git rev-parse --abbrev-ref HEAD)"
+      diff_up="$(git rev-list HEAD..$upstream_branch_name --count)"
+      diff_down="$(git rev-list $upstream_branch_name..HEAD --count)"
 
-    if [[ $diff_up != "0" ]]; then
-      echo -n "$diff_up↑ "
-    fi
+      if [[ $diff_up != "0" ]]; then
+        echo -n "$diff_up↓ "
+      fi
 
-    if [[ $diff_down != "0" ]]; then
-      echo -n "$diff_down↓ "
+      if [[ $diff_down != "0" ]]; then
+        echo -n "$diff_down↑ "
+      fi
     fi
 
     echo -n "${ref/refs\/heads\//$PL_BRANCH_CHAR }${vcs_info_msg_0_%% }${mode}"
