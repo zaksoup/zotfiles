@@ -89,6 +89,7 @@ which rbenv > /dev/null && eval "$(rbenv init -)"
 export PYTHONPATH=/usr/local/lib/python3.5/site-packages
 
 alias vim=nvim
+alias be="bundle exec "
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
