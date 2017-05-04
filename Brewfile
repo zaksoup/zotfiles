@@ -11,6 +11,8 @@ brew 'awscli'
 brew 'chruby'
 brew 'ruby-install'
 brew 'nodejs'
+brew 'ag'
+brew 'tig'
 
 # apps
 cask 'iterm2'

@@ -93,4 +93,7 @@ unsetopt AUTO_CD
 source /usr/local/opt/chruby/share/chruby/chruby.sh
 source /usr/local/opt/chruby/share/chruby/auto.sh
 
+# FZF stuff
+export FZF_DEFAULT_OPTS='--height 100%'
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
