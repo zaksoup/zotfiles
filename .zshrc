@@ -89,4 +89,8 @@ unsetopt AUTO_CD
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# Chruby stuff
+source /usr/local/opt/chruby/share/chruby/chruby.sh
+source /usr/local/opt/chruby/share/chruby/auto.sh
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

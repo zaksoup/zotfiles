@@ -2,35 +2,17 @@
 
 setup() {
   ZOTFILES="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+  brew update
 }
 
-install_with_brew() {
-  local to_install="${1}"
-  brew install "$to_install"
-}
-
-install_with_brew_cask() {
-  local to_install="${1}"
-  brew cask install "$to_install"
-}
-
-install_git() {
-  brew install git
-  brew link git --force
-}
-
-install_git_duet() {
-  brew install git-duet/tap/git-duet
-}
-
-install_golang() {
-  brew install golang
-}
-
-install_iterm() {
-  brew cask install iterm2
+install_prefs() {
+  # Link and read iterm2 prefs
   ln -s "$ZOTFILES/com.googlecode.iterm2.plist" "$HOME/Library/Preferences/com.googlecode.iterm2.plist"
   defaults read "$HOME/Library/Preferences/com.googlecode.iterm2.plist"
+
+  # Link and read Spectacle prefs
+  ln -s "$ZOTFILES/com.divisiblebyzero.Spectacle.plist" "$HOME/Library/Preferences/com.divisiblebyzero.Spectacle.plist"
+  defaults read "$HOME/Library/Preferences/com.divisiblebyzero.Spectacle.plist"
 }
 
 install_omz() {
@@ -48,21 +30,25 @@ install_powerline() {
   popd
 }
 
+install_luan_vim() {
+  echo "Installing luan's vimfiles\n"
+  pushd "$HOME"
+    git clone https://github.com/luan/vimfiles.git .vim
+    pushd .vim
+      ./install
+    popd
+  popd
+}
+
 link_dotfiles() {
   ln -s "$ZOTFILES/.zshrc" "$HOME/.zshrc"
   ln -s "$ZOTFILES/zagnoster.zsh-theme" "$HOME/.oh-my-zsh/themes/zagnoster.zsh-theme"
   cp "$ZOTFILES/.gitconfig" "$HOME/.gitconfig"
-
-  #Link and read Spectacle prefs
-  ln -s "$ZOTFILES/com.divisiblebyzero.Spectacle.plist" "$HOME/Library/Preferences/com.divisiblebyzero.Spectacle.plist"
-  defaults read "$HOME/Library/Preferences/com.divisiblebyzero.Spectacle.plist"
 }
 
 install_neovim() {
-  brew install neovim/neovim/neovim
   ln -s /usr/local/bin/nvim /usr/local/bin/vim
   source ~/.zshrc
-  brew install python3
   pip3 install neovim
 }
 
@@ -74,19 +60,19 @@ set_defaults() {
 main() {
   setup
 
-  install_git
-  install_git_duet
-  install_golang
-  install_with_brew "fzf"
-  install_with_brew "awscli"
-  install_with_brew_cask "spectacle"
-  install_with_brew_cask "google-chrome"
-  install_with_brew_cask "flycut"
-  install_iterm
+  brew bundle
+  brew link git --force
+
+  install_prefs
   install_powerline
   install_neovim
   install_omz
   link_dotfiles
+  install_luan_vim
+
+  ruby-install -L
+  ruby-install ruby
+
   set_defaults
 }
 
