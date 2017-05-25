@@ -11,6 +11,9 @@ export GOPATH=$HOME/go
 # nvim stuff
 export EDITOR=vim
 
+# ruby stuff
+alias be='bundle exec'
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
