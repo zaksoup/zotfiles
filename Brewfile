@@ -2,9 +2,11 @@ cask_args appdir: '/Applications'
 
 # devtools
 brew 'git'
-brew 'git-duet/tap/git-duet'
+tap  'git-duet/tap'
+brew 'git-duet'
 brew 'golang'
-brew 'neovim/neovim/neovim'
+tap  'neovim/neovim'
+brew 'neovim'
 brew 'python3'
 brew 'fzf'
 brew 'awscli'
